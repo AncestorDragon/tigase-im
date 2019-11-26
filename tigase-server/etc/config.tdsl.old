@@ -1,0 +1,22 @@
+c2s/watchdog_timeout=7000
+c2s/watchdog_delay=3000
+admins = [ 'admin@huangzulong', 'admin@192.168.1.40' ]
+'config-type' = 'default'
+debug = [ 'info' ]
+'default-virtual-host' = 'huangzulong'
+'watchdog-ping-type' = 'XMPP'
+'watchdog-timeout' = 7000
+'watchdog_delay' = 3000
+dataSource {
+    default () {
+        uri = 'jdbc:mysql://120.79.8.156:3306/tigasedb?user=root&password=root&useSSL=false&useUnicode=true&characterEncoding=UTF-8'
+    }
+}
+userRepository {
+    default () {}
+}
+authRepository {
+    default () {}
+}
+http (class: tigase.http.HttpMessageReceiver) {}
+'sess-man' () {}

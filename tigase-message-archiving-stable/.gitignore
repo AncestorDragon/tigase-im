@@ -1,0 +1,6 @@
+/target/
+/.idea/
+*.iml
+/docs/
+*.ipr
+src/main/database/*-common-*

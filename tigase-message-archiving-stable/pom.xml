@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>tigase</groupId>
+        <artifactId>tigase-projects-parent</artifactId>
+        <version>1.0.1</version>
+        <relativePath />
+    </parent>
+
+    <artifactId>tigase-message-archiving</artifactId>
+    <version>2.0.1-SNAPSHOT</version>
+    <packaging>bundle</packaging>
+
+    <properties>
+        <license.inlineHeader>${inlineHeader_agpl3}</license.inlineHeader>
+    </properties>
+
+    <name>Tigase Message Archiving Component</name>
+    <description>Implementation of Message Archiving component for Tigase XMPP Server.</description>
+
+    <inceptionYear>2012</inceptionYear>
+
+    <scm>
+        <connection>scm:git:${scm_repo_base}/message-archiving.git</connection>
+        <developerConnection>scm:git:${scm_repo_base}/message-archiving.git</developerConnection>
+        <url>https://projects.tigase.org/projects/message-archiving/repository</url>
+      <tag>HEAD</tag>
+  </scm>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <configuration>
+                    <instructions combine.inherited="append">
+                        <Bundle-Activator>tigase.archive.Activator</Bundle-Activator>
+                        <Bundle-SymbolicName>${project.artifactId};singleton=true</Bundle-SymbolicName>
+                    </instructions>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <profiles>
+        <profile>
+            <id>dist</id>
+
+            <activation>
+                <activeByDefault>false</activeByDefault>
+                <property>
+                    <name>dist</name>
+                </property>
+            </activation>
+
+            <properties>
+                <maven.javadoc.skip>false</maven.javadoc.skip>
+                <guide_name>Tigase_Message_Archiving</guide_name>
+            </properties>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.asciidoctor</groupId>
+                        <artifactId>asciidoctor-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>output-html</id>
+                                <phase>generate-resources</phase>
+                            </execution>
+                            <execution>
+                                <id>output-docbook</id>
+                                <phase>generate-resources</phase>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>com.agilejava.docbkx</groupId>
+                        <artifactId>docbkx-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>generate-webhelp</id>
+                                <phase>generate-resources</phase>
+                            </execution>
+                            <execution>
+                                <id>generate-pdf</id>
+                                <phase>generate-resources</phase>
+                            </execution>
+                            <execution>
+                                <id>generate-html</id>
+                                <phase>generate-resources</phase>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+    <dependencies>
+        <dependency>
+            <groupId>tigase</groupId>
+            <artifactId>tigase-server</artifactId>
+            <version>8.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>tigase</groupId>
+            <artifactId>tigase-server</artifactId>
+            <version>8.0.0</version>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.6.4</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.40</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.sourceforge.jtds</groupId>
+            <artifactId>jtds</artifactId>
+            <version>1.2.8</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>9.4.1207</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.derby</groupId>
+            <artifactId>derby</artifactId>
+            <version>10.12.1.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <repositories>
+        <repository>
+            <id>tigase</id>
+            <url>http://maven-repo.tigase.org/repository/tigase</url>
+        </repository>
+    </repositories>
+</project>
